@@ -120,7 +120,8 @@ enum KeywordType {
     TYPE("type"),
     UNTIL("until"),
     VAR("var"),
-    PROGRAM("program");
+    PROGRAM("program"),
+    PROCEDURE("procedure");
 
     private String value;
 
@@ -132,7 +133,7 @@ enum KeywordType {
         return value;
     }
 
-    public static KeywordType getItem(String s) {
+    public static KeywordType getItem(String s) {   //оперделение keyword 
         s = s.toLowerCase();
         for (KeywordType item : values()) {
             if (item.getValue().equals(s)) {

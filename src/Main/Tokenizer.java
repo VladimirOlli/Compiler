@@ -11,7 +11,7 @@ public class Tokenizer {
         this.program = program;
         generateHash();
     }
-    private void generateHash(){
+    private void generateHash(){    // генерация хэш таблицы
         int j = 0;
         for (StateType state: StateType.values()) {
             HashMap<Character, Supplier> row = new HashMap<>();
@@ -207,7 +207,7 @@ public class Tokenizer {
 
     private Token error() {
         addSymbol();
-        System.out.println("Ошибка емерженси ситуэйшн лив зе билдинг эмидиатели");
+        System.out.println("Ошибка в токене емерженси ситуэйшн лив зе билдинг эмидиатели");
         System.out.println(word);
         System.exit(0);
         return null;
@@ -228,7 +228,7 @@ public class Tokenizer {
         position--;
     }
 
-    public void BackToken(Token token) {
+    public void backToken(Token token) {
         previous = token;
     }
 
@@ -248,7 +248,7 @@ public class Tokenizer {
             previous = null;
             return token;
         }
-        while (index < program.length()){
+        while (index < program.length()){   //цикл который получает строку, позицию, тип ,имя токена через хэш талицу
             symbol = program.charAt(index);
             index++;
             position++;

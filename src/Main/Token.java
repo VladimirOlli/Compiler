@@ -7,7 +7,7 @@ public class Token {
     private String strName;
     public Object value;
 
-    public Token(int line, int pos, TokenType type, String strName) {
+    public Token(int line, int pos, TokenType type, String strName) {   //параметры токена
         this.line = line+1;
         this.pos = pos+1;
         this.type = type;
@@ -40,7 +40,7 @@ public class Token {
     }
 }
 
-class TokenInt extends Token {
+class TokenInt extends Token {                  // распределение токенов по значению value
     public TokenInt(int line, int pos, TokenType type, String strName) {
         super(line, pos, type, strName);
         value = Integer.parseInt(strName);

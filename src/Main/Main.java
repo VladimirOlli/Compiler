@@ -12,9 +12,9 @@ public class Main {
         Token token = tokenizer.next();
         while (token.getType() != TokenType.EOF) {
             System.out.println(token);
-            token = tokenizer.next();
+            token = tokenizer.next();   //вывод и переход к следующему токену
         }
 
-        System.out.println("я щас разъебу ваш компилятор!");
+        System.out.println("Выполнено!");
     }
 }
