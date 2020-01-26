@@ -8,7 +8,7 @@ public class Tokenizer {
     private String program;
 
     public Tokenizer(String program){
-        this.program = program;
+        this.program = program + "\n";
         generateHash();
     }
     private void generateHash(){    // генерация хэш таблицы
@@ -209,8 +209,9 @@ public class Tokenizer {
         addSymbol();
         System.out.println("Ошибка в токене емерженси ситуэйшн лив зе билдинг эмидиатели");
         System.out.println(word);
-        System.exit(0);
-        return null;
+        //System.exit(0);
+       // return null;
+        return new TokenOp(line, position, TokenType.ERROR, word);
     }
 
     private Token plusLine() {

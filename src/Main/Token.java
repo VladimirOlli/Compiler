@@ -8,8 +8,8 @@ public class Token {
     public Object value;
 
     public Token(int line, int pos, TokenType type, String strName) {   //параметры токена
-        this.line = line+1;
-        this.pos = pos+1;
+        this.line = line;
+        this.pos = pos;
         this.type = type;
         this.strName = strName;
     }

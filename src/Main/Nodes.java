@@ -69,7 +69,6 @@ class NodeProgram extends Node {
 }
 class NodeProgramBlock extends Node {
     private NodeDeclaratPart declaratPart;
-
     private NodeCompoundStatement compoundStatement;
     public NodeProgramBlock(NodeDeclaratPart declaratPart, NodeCompoundStatement compoundStatement) {
         this.declaratPart = declaratPart;
@@ -87,8 +86,35 @@ class NodeDeclaratPart extends Node{
 
 }
 class NodeCompoundStatement extends Node{
+    ArrayList<Node> list2 = new ArrayList<>();
 
 }
+class NodeInit extends Node{
+    private NodeIdent name;
+    private NodeExpr  expr;
+
+    public NodeInit(NodeIdent name, NodeExpr expr) {
+        this.name = name;
+        this.expr = expr;
+    }
+}
+class NodeExpr extends Node{
+    Node nodeExpr;
+
+    public NodeExpr(Node nodeExpr) {
+        this.nodeExpr = nodeExpr;
+    }
+}
+class NodeProcedureCall extends Node{
+    NodeToken name;
+    NodeArray array;
+
+    public NodeProcedureCall(NodeToken name, NodeArray array) {
+        this.name = name;
+        this.array = array;
+    }
+}
+
 class NodeSectionList extends Node{
     ArrayList<Node> sectionList;
 
@@ -114,10 +140,42 @@ class  NodeVar extends NodeToken{
     }
 }
 
-class NodeSection extends Node{
-    private NodeProcedure procedure;
+class NodeSection extends Node {
+    private NodeArray array;
+    private NodeType type;
+
+    public NodeSection(NodeArray array, NodeType type) {
+        this.array = array;
+        this.type = type;
+    }
 
 }
 class NodeProcedure extends Node{
+    NodeIdent name;
+    NodeArray paramList;
+    NodeProgramBlock block;
 
+    public NodeProcedure(NodeIdent name, NodeArray paramList, NodeProgramBlock block) {
+        this.name = name;
+        this.paramList = paramList;
+        this.block = block;
+    }
 }
+
+class NodeArray extends Node{
+    ArrayList<Node> list = new ArrayList<>();
+
+    public NodeArray(ArrayList<Node> list) {
+        this.list = list;
+    }
+}
+class NodeIf extends Node{
+    NodeExpr nodeExpr;
+    NodeArray statements;
+
+    public NodeIf(NodeExpr nodeExpr, NodeArray statements) {
+        this.nodeExpr = nodeExpr;
+        this.statements = statements;
+    }
+}
+

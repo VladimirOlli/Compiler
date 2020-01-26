@@ -1,0 +1,3 @@
+0	1	IDENT	r	r
+0	2	OPERATOR	=	EQUAL
+0	3	IDENT	b	b

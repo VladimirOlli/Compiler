@@ -1,0 +1,3 @@
+0	2	IDENT	aa	aa
+0	4	OPERATOR	:=	ASSIGN
+0	12	STRING	'lfhjdf'	lfhjdf

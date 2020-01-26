@@ -1,0 +1,3 @@
+0	1	IDENT	a	a
+0	3	IDENT	b	b
+0	5	IDENT	c	c

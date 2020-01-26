@@ -1,0 +1,3 @@
+0	1	ERROR	&	null
+0	2	ERROR	&	null
+0	3	INT	1	1

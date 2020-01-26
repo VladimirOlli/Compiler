@@ -14,7 +14,7 @@ public class Main {
             System.out.println(token);
             token = tokenizer.next();   //вывод и переход к следующему токену
         }
-
+        LexTester lexTester = new LexTester();
         System.out.println("Выполнено!");
     }
 }

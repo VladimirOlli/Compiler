@@ -1,0 +1,4 @@
+0	1	IDENT	u	u
+0	2	OPERATOR	+	null
+0	3	INT	7	7
+0	4	SEPARATOR	;	SEMI

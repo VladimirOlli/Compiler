@@ -1,0 +1,3 @@
+0	1	INT	3	3
+0	2	OPERATOR	-	null
+0	3	INT	0	0

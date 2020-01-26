@@ -76,16 +76,52 @@ public class Parser {
     }
 
     private NodeCompoundStatement compoundStatement() {
+        reqTokenValue(KeywordType.BEGIN);
+        Token token = tokenizer.next();
+        ArrayList<Node> statements = new ArrayList<Node>();
+        while (tokenCheckValue(token, KeywordType.END)) {
+            if (tokenCheckType(nextBack(), TokenType.IDENT)) {
+                Token name = reqTokenType(TokenType.IDENT);
+                if (tokenCheckValue(nextBack(), OpType.EQUAL)) {
+                    reqTokenValue(OpType.EQUAL);
+                    statements.add(new NodeInit(new NodeIdent(name), nodeExpr(new NodeToken(name))));
+                }else if(tokenCheckValue(nextBack(),SepType.SEMI)){
+                    statements.add(new NodeProcedureCall(new NodeToken(name), null));
+                }else if(tokenCheckValue(nextBack(),SepType.F_PARENT)) {
+                    statements.add(new NodeProcedureCall(new NodeToken(name), paramProcedureList()));
+                }
+            }else if (tokenCheckValue(nextBack(),KeywordType.IF)){
+                reqTokenValue(KeywordType.IF);
+                reqTokenValue(SepType.F_PARENT);
+                NodeExpr exr = nodeExpr(new NodeToken(token));
+                reqTokenValue(SepType.S_PARENT);
 
+
+
+            }
+        }
+        reqTokenValue(KeywordType.END);
+        reqTokenValue(SepType.POINT);
+        return null;
     }
-
+    private NodeArray paramProcedureList(){
+        ArrayList<Node> sectionList = new ArrayList<>();
+        Token token = reqTokenValue(TokenType.IDENT);
+        NodeToken name = new NodeToken(token);
+        sectionList.add(name);
+        while (tokenCheckValue(nextBack(), SepType.COMMA)) {
+            reqTokenValue(SepType.COMMA);
+            sectionList.add(nodeExpr(new NodeToken(token)));
+        }
+        return new NodeArray(sectionList);
+    }
     private NodeDeclaratPart declaratPart() {
         NodeSectionList sectionList = sectionList();
         return new NodeDeclaratPart(sectionList);
     }
 
     private NodeSectionList sectionList() {
-        ArrayList<Node> sectionList = new ArrayList<Node>();
+        ArrayList<Node> sectionList = new ArrayList<>();
         if (tokenCheckValue(nextBack(), KeywordType.VAR)) {
             reqTokenValue(KeywordType.VAR);
             while (tokenCheckType(nextBack(), TokenType.IDENT)) {
@@ -98,29 +134,42 @@ public class Parser {
         }
         return new NodeSectionList(sectionList);
     }
+    private NodeArray nodeVarDeclarationList(){
+        ArrayList<Node> sectionList = new ArrayList<>();
+        while (tokenCheckType(nextBack(), TokenType.IDENT)) {
+            sectionList.add(varDeclaration());
+            reqTokenValue(SepType.SEMI);
+        }
+        return new NodeArray(sectionList);
+    }
 
     private NodeSection varDeclaration() {
-        ArrayList<Token> varList = new ArrayList<Token>();
-        varList.add(reqTokenType(TokenType.IDENT));
+        ArrayList<Node> varList = new ArrayList<>();
+        varList.add(new NodeToken(reqTokenType(TokenType.IDENT)));
         while (tokenCheckValue(nextBack(),SepType.COMMA)) {
             reqTokenValue(SepType.COMMA);
-            varList.add(reqTokenType(TokenType.IDENT));
+            varList.add(new NodeToken(reqTokenType(TokenType.IDENT)));
         }
         reqTokenValue(OpType.COLON);
         NodeType type = new NodeType(next());
-        ArrayList<NodeVar> nodeVar = new ArrayList<NodeVar>();
-        nodeVar.add(type)
-
+        return new NodeSection(new NodeArray(varList), type);
     }
 
     private NodeProcedure procedure() {
         reqTokenValue(KeywordType.PROCEDURE);
         NodeIdent name = new NodeIdent(reqTokenType(TokenType.IDENT));
+        reqTokenValue(SepType.F_PARENT);
+        NodeArray paramList = nodeVarDeclarationList();
+        reqTokenValue(SepType.S_PARENT);
         reqTokenValue(SepType.SEMI);
         NodeProgramBlock block = programBlock();
         reqTokenValue(SepType.SEMI);
-        return new NodeProcedure();
+        return new NodeProcedure(name, paramList, block);
     }
+    private NodeExpr nodeExpr(NodeToken name){
+        return null;
+    }
+
 }
 
 
